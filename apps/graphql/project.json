@@ -1,0 +1,38 @@
+{
+  "name": "graphql",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/graphql/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/graphql",
+        "format": ["cjs"],
+        "main": "apps/graphql/src/main.ts",
+        "tsConfig": "apps/graphql/tsconfig.app.json",
+        "assets": ["apps/graphql/src/assets"]
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/js:node",
+      "options": {
+        "buildTarget": "graphql:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "graphql:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/graphql/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}
